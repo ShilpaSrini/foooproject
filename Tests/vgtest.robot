@@ -36,9 +36,9 @@ Then User is logged in
 
 User enters valid dates to book car
      Press Keys    xpath://*[@id="reset"]     RETURN
-     input text    xpath://*[@id="start"]      0315
+     input text    xpath://*[@id="start"]      0329
 
-     input text    xpath://*[@id="end"]        0320
+     input text    xpath://*[@id="end"]        0330
      ${STARTDATE}=  get value     xpath://*[@id="start"]
 
 User clicks the continue button

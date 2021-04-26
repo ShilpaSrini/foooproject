@@ -5,7 +5,14 @@ pipeline {
                 steps     {
                     git 'https://github.com/ShilpaSrini/fooproject/'
                     }
-                    }
+               }
+            stage ('Code Analysis') {
+              steps {
+                     sh "mvn pmd:pmd"
+					 sh "mvn checkstyle:checkstyle"
+					 sh "mvn findbugs:findbugs"
+                }
+            }
             stage ('Build') {
                 steps {
                     sh "mvn compile"
@@ -25,6 +32,9 @@ pipeline {
                     
                       }
                 post  {
+                               success{ gerritReview score:1}
+                               failure{ gerritReview score:-1}
+			failure{ 
                     always {
                     junit '**/target/surefire-reports/TEST*.xml'
                             }
